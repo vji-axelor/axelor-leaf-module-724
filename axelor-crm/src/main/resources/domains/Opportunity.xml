@@ -47,7 +47,6 @@
     <string name="lostReasonStr" title="Lost reason" large="true"/>
     <many-to-one name="tradingName" ref="com.axelor.apps.base.db.TradingName"/>
     <string name="opportunitySeq" title="Reference" readonly="true" unique="true"/>
-
     <decimal name="recurrentAmount" title="Recurrent amount"/>
     <integer name="expectedDurationOfRecurringRevenue"
       title="Expected duration of recurring revenue (in months)"/>
@@ -55,8 +54,19 @@
     <date name="recurringEndDate" title="Recurring end date"/>
     <integer name="opportunityRating" title="Opportunity scoring"
       selection="gold.rating.icon.select"/>
-
+    <integer name="priority" selection="crm.opportunity.priority.select"/>
     <finder-method name="findByPartner" using="partner" all="true"/>
+    <extra-code>
+		<![CDATA[
+		// Stage SELECT
+			public static final int SALES_STAGE_NEW = 1;
+			public static final int SALES_STAGE_QUALIFICATION = 2;
+			public static final int SALES_STAGE_PROPOSITION = 3;
+			public static final int SALES_STAGE_NEGOTIATION = 4;
+			public static final int SALES_STAGE_CLOSED_WON = 5;
+			public static final int SALES_STAGE_CLOSED_LOST = 6;
+		]]>
+    </extra-code>
 
     <track>
       <field name="name"/>

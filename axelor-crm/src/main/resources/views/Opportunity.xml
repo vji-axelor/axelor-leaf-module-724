@@ -14,6 +14,7 @@
     <hilite background="success" if="$get('opportunityStatus.id') == $closedWonId"/>
     <hilite background="danger" if="$get('opportunityStatus.id') == $closedLostId"/>
     <field name="opportunitySeq"/>
+    <field name="priority" title="Priority"/>
     <field name="name" required="true"/>
     <field name="createdOn" hidden="true"/>
     <field name="company" form-view="company-form" grid-view="company-grid"
@@ -25,9 +26,11 @@
     <field name="amount" aggregate="sum"/>
     <field name="probability" aggregate="avg" widget="Progress"/>
     <field name="expectedCloseDate"/>
+    <field name="updatedOn"/>
     <field name="user" form-view="user-form" grid-view="user-grid"/>
     <field name="$closedWonId" hidden="true"/>
     <field name="$closedLostId" hidden="true"/>
+    <field name="archived"/>
     <button name="grabOpportunityBtn" icon="fa-suitcase" help="Take charge"
       onClick="com.axelor.apps.crm.web.OpportunityController:assignToMe"
       hideIf="user.id == _internalUserId"/>
@@ -48,6 +51,7 @@
     <hilite background="success" if="$get('opportunityStatus.id') == $closedWonId"/>
     <hilite background="danger" if="$get('opportunityStatus.id') == $closedLostId"/>
     <field name="opportunitySeq"/>
+    <field name="priority" title="Priority"/>
     <field name="name" width="300"/>
     <field name="company" form-view="company-form" grid-view="company-grid"
       if="__config__.app.getApp('base')?.getEnableMultiCompany()"/>
@@ -217,6 +221,7 @@
           form-view="user-form" grid-view="user-grid"/>
         <field name="company" widget="SuggestBox" canEdit="false" form-view="company-form"
           grid-view="company-grid" required="true"/>
+        <field name="priority" title="Priority"/>
         <field if="__config__.app.getApp('base')?.getTeamManagement()" name="team"
           canEdit="false" form-view="team-form" grid-view="team-grid"/>
         <field if="__config__.app.getApp('base')?.enableTradingNamesManagement"
@@ -242,7 +247,12 @@
         <field name="contact" canEdit="false" requiredIf="partner == null"
           readonlyIf="$get('opportunityStatus.id') == $closedWonId || $get('opportunityStatus.id') == $closedLostId"
           domain="self.isContact = true AND :company member of self.companySet"
-          form-view="partner-contact-form" grid-view="partner-contact-grid"/>
+          form-view="partner-contact-form" grid-view="partner-contact-grid"
+          onChange="action-opportunity-record-set-lead-onchange"/>
+        <field name="lead" canEdit="false"
+          readonlyIf="salesStageSelect == 5 || salesStageSelect == 6" form-view="lead-form"
+          grid-view="lead-grid" onChange="action-opportunity-record-set-partner-onchange"/>
+        <field name="updatedOn"/>
       </panel>
       <panel name="postitPanel" title="Memo" canCollapse="true">
         <field name="memo" showTitle="false" colSpan="12"/>

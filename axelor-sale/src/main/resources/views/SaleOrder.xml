@@ -237,6 +237,9 @@
         onClick="save,action-sale-order-view-reports-wizard"/>
       <button name="sendByEmailBtn" title="Send email" icon="fa-envelope"
         onClick="action-send-by-email-with-template"/>
+      <button name="reportsDoBtn" title="DO Report" icon="fa-print"
+        hideIf="clientPartner == null" readonlyIf="!id"
+        onClick="save,action-sale-order-method-print-do"/>
     </toolbar>
     <menubar>
       <menu name="saleOrderToolsMenu" title="Tools">
@@ -1645,6 +1648,10 @@
 
   <action-method name="action-sale-order-method-show-sale-order">
     <call class="com.axelor.apps.sale.web.SaleOrderController" method="showSaleOrder"/>
+  </action-method>
+
+  <action-method name="action-sale-order-method-print-do">
+    <call class="com.axelor.apps.sale.web.SaleOrderController" method="printDo"/>
   </action-method>
 
   <action-method name="action-sale-order-method-print-proforma-invoice">

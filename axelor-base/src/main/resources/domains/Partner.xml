@@ -132,6 +132,7 @@
       ref="com.axelor.apps.base.db.PartnerLink" title="Managed by" mappedBy="partner1"/>
     <one-to-many name="managedForPartnerLinkList"
       ref="com.axelor.apps.base.db.PartnerLink" title="Managed for" mappedBy="partner2"/>
+    <string name="custumerRefNumber" title="Customer Ref Number"/>
 
     <!-- -Json fields -->
     <string name="partnerAttrs" title="Fields" json="true"/>

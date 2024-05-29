@@ -719,6 +719,7 @@ public class SaleOrderController {
     }
     response.setReload(true);
   }
+
   public void printDo(ActionRequest request, ActionResponse response) throws AxelorException {
     SaleOrder saleOrder = request.getContext().asType(SaleOrder.class);
     String locale = ReportSettings.getPrintingLocale(saleOrder.getClientPartner());

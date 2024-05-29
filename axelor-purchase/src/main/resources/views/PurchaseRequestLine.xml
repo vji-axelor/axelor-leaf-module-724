@@ -20,12 +20,17 @@
         hideIf="__parent__.statusSelect &gt; 2 &amp;&amp; !newProduct"/>
       <spacer/>
       <field name="product" colSpan="6" form-view="product-form" grid-view="product-grid"
-        hideIf="newProduct" requiredIf="!newProduct" canEdit="false"
+        domain="self.defaultSupplierPartner = :supplier" hideIf="newProduct"
+        requiredIf="!newProduct" canEdit="false"
         onChange="action-purchase-request-line-product-on-change"/>
       <field name="productTitle" colSpan="6" showIf="newProduct" requiredIf="newProduct"/>
       <field name="unit" colSpan="6"/>
       <field name="quantity" colSpan="6"/>
       <field name="purchaseRequest" hideIf="$popup()"/>
+    </panel>
+    <panel hidden="true">
+      <field name="$supplier" title="Supplier" type="many-to-one"
+        target="com.axelor.apps.base.db.Partner" colSpan="6"/>
     </panel>
   </form>
 
@@ -39,6 +44,7 @@
   <action-attrs name="action-purchase-request-line-attrs-set-scale">
     <attribute name="scale" for="quantity"
       expr="eval: __config__.app.getNbDecimalDigitForQty()"/>
+    <attribute name="value" for="$supplier" expr="eval:__parent__?.supplierUser"/>
   </action-attrs>
 
   <action-record name="action-purchase-request-line-record-default"

@@ -483,9 +483,10 @@
 
   <selection name="invoice.report.type">
     <option value="1">Proforma</option>
-    <option value="2">Original invoice</option>
+    <option value="2">Original invoice1</option>
     <option value="3">Invoice with payments details</option>
     <option value="4">Updated copy</option>
+    <option value="5">Receipt</option>
   </selection>
 
   <selection name="invoice.report.format">

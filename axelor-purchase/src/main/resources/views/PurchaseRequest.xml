@@ -111,7 +111,10 @@
 
   <action-record name="action-purchase-request-record-default"
     model="com.axelor.apps.purchase.db.PurchaseRequest">
-    <field name="company" expr="eval:__user__.activeCompany"/>
+    <field name="company" expr="eval:__user__.activeCompany"
+      if="__user__.activeCompany != null"/>
+    <field name="company" expr="eval:__repo__(Company).all().fetchOne()"
+      if="__user__.activeCompany == null &amp;&amp; __repo__(Company).all().count() == 1"/>
     <field name="supplierUser"
       expr="eval:__repo__(Product).find(_product?.id)?.getDefaultSupplierPartner()" if="_product"/>
   </action-record>

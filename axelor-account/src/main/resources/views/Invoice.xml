@@ -385,8 +385,8 @@
     onSave="action-invoice-onsave-group" canDelete="statusSelect == 4">
 
     <toolbar>
-      <button name="reportsBtn" title="Reports" icon="fa-print" showIf="statusSelect != 4"
-        readonlyIf="!id" onClick="action-invoice-group-report-button"/>
+      <button name="reportsBtn" title="Invoice/Receipt" icon="fa-print"
+        showIf="statusSelect != 4" readonlyIf="!id" onClick="action-invoice-group-report-button"/>
     </toolbar>
 
     <menubar>
@@ -446,7 +446,7 @@
         showIf="id">
         <viewer>
                     <![CDATA[
-						<span ng-show="(record.operationSubTypeSelect != 2 && record.statusSelect &lt; 3) || (record.operationSubTypeSelect == 2 && record.statusSelect == 1)" x-translate>Proforma </span>
+						<span ng-show="(record.operationSubTypeSelect != 2 && record.statusSelect &lt; 3) || (record.operationSubTypeSelect == 2 && record.statusSelect == 1)" x-translate> </span>
                         <span ng-show="record.statusSelect == 4" x-translate>Cancel invoice n°</span>
                         <span>{{record.invoiceId}}</span>
                         ]]>
@@ -1064,12 +1064,12 @@ InvoiceSet.length > 0))"
           onChange="action-invoice-reports-wizard-attrs-set-format-select"
           showIf="_statusSelect == 1 || (_statusSelect == 2 &amp;&amp; _operationSubTypeSelect != 2)"
           readonly="true" colSpan="12"/>
-        <field name="$reportType" title="Invoice type" type="integer" selection-in="[2,3]"
+        <field name="$reportType" title="Invoice type" type="integer" selection-in="[2,3,5]"
           selection="invoice.report.type" required="true"
           onChange="action-invoice-reports-wizard-attrs-set-format-select"
           showIf="(_statusSelect == 3  || (_operationSubTypeSelect == 2 &amp;&amp; _statusSelect == 2)) &amp;&amp; _printedPDF == null"
           colSpan="12"/>
-        <field name="$reportType" title="Invoice type" type="integer" selection-in="[2,3,4]"
+        <field name="$reportType" title="Invoice type" type="integer" selection-in="[2,3,4,5]"
           selection="invoice.report.type" colSpan="12" required="true"
           onChange="action-invoice-reports-wizard-attrs-set-format-select"
           showIf="(_statusSelect == 3 || (_operationSubTypeSelect == 2 &amp;&amp; _statusSelect == 2)) &amp;&amp; _printedPDF != null"/>
@@ -2069,8 +2069,7 @@ InvoiceSet.length > 0))"
   <action-attrs name="action-invoice-reports-wizard-attrs-set-report-type-select">
     <attribute name="value" for="$reportType" expr="eval: 1"
       if="_statusSelect == 1 || (_statusSelect == 2 &amp;&amp; _operationSubTypeSelect != 2)"/>
-    <attribute name="value" for="$format" expr="pdf" if="_statusSelect == 3"/>
-    <attribute name="readonly" for="$format" expr="eval: _statusSelect == 3"/>
+    <attribute name="value" for="$format" expr="pdf"/>
     <attribute name="value" expr="eval: _language" for="$language"/>
   </action-attrs>
 

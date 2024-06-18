@@ -390,6 +390,13 @@
     </toolbar>
 
     <menubar>
+      <menu name="invoiceToolsMenu" title="Invoice/Receipt" icon="fa-print" showTitle="true">
+        <item name="printReceipt" title="Print Receipt"
+          action="save,action-invoice-print-invoice-receipt" readonlyIf="partner == null"/>
+        <item name="printReceipt" title="Print Invoice"
+          action="save,action-invoice-print-invoice-inv-copy" readonlyIf="partner == null"/>
+      </menu>
+
       <menu name="invoiceToolsMenu" title="Tools" icon="fa-wrench" showTitle="true">
         <item name="sendEmailItem" title="Send email"
           action="save,action-send-by-email-with-template" readonlyIf="partner == null"/>
@@ -2786,4 +2793,11 @@ InvoiceSet.length > 0))"
     <action name="action-invoice-view-reports-wizard"/>
   </action-group>
 
+  <action-method name="action-invoice-print-invoice-receipt">
+    <call class="com.axelor.apps.account.web.InvoiceController" method="printReceipt"/>
+  </action-method>
+
+  <action-method name="action-invoice-print-invoice-inv-copy">
+    <call class="com.axelor.apps.account.web.InvoiceController" method="printInvoiceCopy"/>
+  </action-method>
 </object-views>

@@ -18,6 +18,7 @@
  */
 package com.axelor.apps.account.web;
 
+import com.axelor.apps.ReportFactory;
 import com.axelor.apps.account.db.AccountingSituation;
 import com.axelor.apps.account.db.Invoice;
 import com.axelor.apps.account.db.InvoiceLine;
@@ -1280,5 +1281,30 @@ public class InvoiceController {
     Beans.get(InvoiceService.class).updateSubrogationPartner(invoice);
 
     response.setValue("invoiceTermList", invoice.getInvoiceTermList());
+  }
+
+  public void printReceipt(ActionRequest request, ActionResponse response) throws AxelorException {
+    Invoice invoice = request.getContext().asType(Invoice.class);
+
+    String fileLink =
+        ReportFactory.createReport("InvoiceReceipt.rptdesign", "Receipt")
+            .addParam("InvoiceId", invoice.getId())
+            .generate()
+            .getFileLink();
+
+    response.setView(ActionView.define("Receipt").add("html", fileLink).map());
+  }
+
+  public void printInvoiceCopy(ActionRequest request, ActionResponse response)
+      throws AxelorException {
+    Invoice invoice = request.getContext().asType(Invoice.class);
+
+    String fileLink =
+        ReportFactory.createReport("Invoice.rptdesign", "Invoice")
+            .addParam("InvoiceId", invoice.getId())
+            .generate()
+            .getFileLink();
+
+    response.setView(ActionView.define("Invoice").add("html", fileLink).map());
   }
 }

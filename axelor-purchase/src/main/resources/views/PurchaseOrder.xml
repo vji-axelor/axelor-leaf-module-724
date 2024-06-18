@@ -118,6 +118,16 @@
         onClick="save,action-purchase-order-method-show-purchase-order"/>
     </toolbar>
     <menubar>
+
+      <menu name="reportMenu" title="Reports" icon="fa-print" showTitle="true">
+        <item name="reportsBtn" title="Purchase Quotation"
+          action="save,action-purchase-order-method-show-purchase-order-quote"
+          hideIf="supplierPartner == null"/>
+        <item name="reportsBtn" title="Purchase Order"
+          action="save,action-purchase-order-method-show-purchase-order"
+          hideIf="supplierPartner == null"/>
+      </menu>
+
       <menu name="purchaseOrderToolsMenu" title="Tools" icon="fa-wrench" showTitle="true">
         <item name="sendEmailItem" title="Send email"
           action="save,action-send-by-email-with-template" hideIf="supplierPartner == null"/>
@@ -765,6 +775,11 @@
   <action-method name="action-purchase-order-method-show-purchase-order">
     <call class="com.axelor.apps.purchase.web.PurchaseOrderController"
       method="showPurchaseOrder"/>
+  </action-method>
+
+  <action-method name="action-purchase-order-method-show-purchase-order-quote">
+    <call class="com.axelor.apps.purchase.web.PurchaseOrderController"
+      method="printPurchaseOrderQuote"/>
   </action-method>
 
   <action-method name="action-purchase-order-method-validate">

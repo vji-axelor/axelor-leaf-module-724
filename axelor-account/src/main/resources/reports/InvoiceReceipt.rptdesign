@@ -776,7 +776,7 @@ where Invoice.id = ?]]></xml-property>
                         <property name="showIfBlank">false</property>
                         <property name="canShrink">false</property>
                         <property name="overflow">hidden</property>
-                        <text-property name="text">Invoice</text-property>
+                        <text-property name="text">Receipt</text-property>
                     </label>
                 </cell>
                 <cell id="13">
@@ -790,7 +790,7 @@ where Invoice.id = ?]]></xml-property>
                             <cell id="31">
                                 <label id="33">
                                     <property name="fontWeight">bold</property>
-                                    <text-property name="text">NO.:</text-property>
+                                    <text-property name="text">NO:</text-property>
                                 </label>
                             </cell>
                             <cell id="32">
@@ -805,7 +805,8 @@ where Invoice.id = ?]]></xml-property>
                                         </structure>
                                         <structure>
                                             <property name="name">Sque</property>
-                                            <expression name="expression" type="javascript">row["squence"]</expression>
+                                            <expression name="expression" type="javascript">var text = row["squence"];
+text.replace('CINV','OR');</expression>
                                             <property name="dataType">string</property>
                                             <property name="allowExport">true</property>
                                         </structure>

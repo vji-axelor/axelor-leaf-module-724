@@ -18,6 +18,7 @@
  */
 package com.axelor.apps.purchase.web;
 
+import com.axelor.apps.ReportFactory;
 import com.axelor.apps.account.db.FiscalPosition;
 import com.axelor.apps.account.db.PaymentMode;
 import com.axelor.apps.base.AxelorException;
@@ -568,5 +569,17 @@ public class PurchaseOrderController {
     } catch (Exception e) {
       TraceBackService.trace(response, e);
     }
+  }
+
+  public void printPurchaseOrderQuote(ActionRequest request, ActionResponse response)
+      throws AxelorException {
+    PurchaseOrder purchaseOrder = request.getContext().asType(PurchaseOrder.class);
+    String fileLink =
+        ReportFactory.createReport("PurchaseOrderQuote.rptdesign", "Purchase Quote")
+            .addParam("PurchaseOrderId", purchaseOrder.getId())
+            .generate()
+            .getFileLink();
+
+    response.setView(ActionView.define("Purchase Quote").add("html", fileLink).map());
   }
 }

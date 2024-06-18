@@ -724,6 +724,11 @@ public class SaleOrderController {
     SaleOrder saleOrder = request.getContext().asType(SaleOrder.class);
     String locale = ReportSettings.getPrintingLocale(saleOrder.getClientPartner());
 
+    if (saleOrder.getPrintingSettings() == null) {
+      response.setAlert("Please select Printing setting on sale order.");
+      return;
+    }
+
     String fileLink =
         ReportFactory.createReport("SaleOrder_Do.rptdesign", "Delivery Order")
             // .addParam("StartDate", Date.valueOf(startDate))

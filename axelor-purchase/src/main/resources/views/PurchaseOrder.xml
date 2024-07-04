@@ -114,11 +114,10 @@
     onNew="action-group-purchase-order-on-new-actions">
     <toolbar>
       <button name="reportsBtn" title="Reports" icon="fa-print"
-        hideIf="supplierPartner == null" readonlyIf="!id"
+        hideIf="true" readonlyIf="!id"
         onClick="save,action-purchase-order-method-show-purchase-order"/>
     </toolbar>
     <menubar>
-
       <menu name="reportMenu" title="Reports" icon="fa-print" showTitle="true">
         <item name="reportsBtn" title="Purchase Quotation"
           action="save,action-purchase-order-method-show-purchase-order-quote"

@@ -575,11 +575,11 @@ public class PurchaseOrderController {
       throws AxelorException {
     PurchaseOrder purchaseOrder = request.getContext().asType(PurchaseOrder.class);
     String fileLink =
-        ReportFactory.createReport("PurchaseOrderQuote.rptdesign", "Purchase Quote")
+        ReportFactory.createReport("PurchaseOrderQuote.rptdesign", "Quotation")
             .addParam("PurchaseOrderId", purchaseOrder.getId())
             .generate()
             .getFileLink();
 
-    response.setView(ActionView.define("Purchase Quote").add("html", fileLink).map());
+    response.setView(ActionView.define("Quotation").add("html", fileLink).map());
   }
 }

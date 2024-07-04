@@ -720,7 +720,7 @@ where PurchaseOrder.id = ?
                                         <label id="4618">
                                             <property name="fontSize">16pt</property>
                                             <property name="fontWeight">bold</property>
-                                            <text-property name="text">Purchase Order</text-property>
+                                            <text-property name="text">Quotation</text-property>
                                         </label>
                                     </cell>
                                     <cell id="4619">

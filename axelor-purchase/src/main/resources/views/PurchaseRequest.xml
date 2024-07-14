@@ -43,6 +43,8 @@
         onChange="action-purchase-request-group-company-onchange"/>
       <field name="$product" hidden="true" domain="self.dtype = 'Product'"/>
     </panel>
+    <panel-related field="validatorUserList" readonlyIf="statusSelect > 1"
+      form-view="purchase-request-validator-form" grid-view="purchase-request-validator-draft-grid"/>
     <panel-related field="purchaseRequestLineList"
       form-view="purchase-request-line-form" grid-view="purchase-request-line-grid"/>
     <panel-tabs name="descriptionPanelTab">
@@ -53,9 +55,80 @@
 
     <panel name="detailPanel" sidebar="true">
       <button name="requestBtn" title="Request" icon="fa-bullhorn" showIf="statusSelect == 1"
-        onClick="action-purchase-request-group-request-button"/>
+        onClick="save,action-purchase-request-group-request-validate-button,action-purchase-request-group-request-button"/>
       <button name="acceptBtn" title="Accept" icon="fa-check" showIf="statusSelect == 2"
-        onClick="action-purchase-request-group-accept-button"/>
+        onClick="save,action-purchase-request-group-accept-validate-button,action-purchase-request-group-accept-button"/>
+      <button name="purchaseBtn" title="Purchase" icon="fa-shopping-cart"
+        showIf="statusSelect == 3" onClick="action-purchase-request-group-purchase-button"/>
+      <button name="refuseBtn" title="Refuse" icon="fa-times" css="btn-danger"
+        showIf="statusSelect == 2" onClick="action-purchase-request-group-refuse-button"/>
+      <button name="cancelBtn" title="Cancel" icon="fa-times-circle" css="btn-danger"
+        onClick="action-purchase-request-group-cancel-button" hideIf="statusSelect == 6"/>
+      <button name="draftBtn" title="Draft" icon="fa-edit" showIf="statusSelect == 6"
+        onClick="action-purchase-request-group-draft-button"/>
+    </panel>
+    <panel sidebar="true" name="characteristicsPanel" title="Characteristics"
+      canCollapse="true">
+      <field name="stockLocation" canEdit="false"
+        domain="self.company = :company and self.typeSelect in (1,2) and self.usableOnPurchaseOrder = true"
+        if-module="axelor-supplychain" colSpan="12" form-view="stock-location-form"
+        grid-view="stock-location-grid" if="__config__.app.isApp('supplychain')"/>
+      <field name="supplierUser" domain="self.isSupplier = true" colSpan="12" canEdit="false"
+        form-view="partner-form" grid-view="partner-grid"/>
+      <field name="requesterUser"/>
+      <field name="validatorUser"/>
+    </panel>
+    <panel sidebar="true" name="follow-upPanel" title="Follow-up" canCollapse="true"
+      showIf="purchaseOrder">
+      <field name="purchaseOrder" colSpan="6" readonly="true"/>
+      <field name="purchaseOrder.statusSelect" colSpan="6" readonly="true"/>
+      <field name="purchaseOrder.receiptState" colSpan="6" readonly="true"/>
+    </panel>
+    <panel name="attrsPanel">
+      <field name="attrs" colSpan="12"/>
+    </panel>
+    <panel-mail name="mailPanel">
+      <mail-messages limit="4"/>
+      <mail-followers/>
+    </panel-mail>
+  </form>
+
+  <form name="purchase-request-validator-form" title="Purchase request"
+    model="com.axelor.apps.purchase.db.PurchaseRequest" onNew="action-purchase-request-group-onnew"
+    width="large">
+    <panel name="statusSelectPanel" colSpan="12">
+      <field name="statusSelect" readonly="true" colSpan="12" widget="nav-select"
+        showTitle="false"/>
+      <field name="purchaseRequestSeq" showTitle="false" readonly="true">
+        <viewer depends="purchaseRequestSeq"><![CDATA[
+					<h3>
+						<span ng-show="record.purchaseRequestSeq" x-translate>Purchase request</span>
+						{{record.purchaseRequestSeq}}
+					</h3>
+				]]></viewer>
+      </field>
+    </panel>
+    <panel name="mainPanel" readonlyIf="!$contains([1,2],statusSelect)">
+      <field name="company" form-view="company-form" grid-view="company-grid" canEdit="false"
+        onChange="action-purchase-request-group-company-onchange"/>
+      <field name="$product" hidden="true" domain="self.dtype = 'Product'"/>
+    </panel>
+    <panel-related field="validatorUserList"
+      form-view="purchase-request-validator-form"
+      grid-view="purchase-request-validator-requested-grid"/>
+    <panel-related field="purchaseRequestLineList"
+      form-view="purchase-request-line-form" grid-view="purchase-request-line-grid"/>
+    <panel-tabs name="descriptionPanelTab">
+      <panel name="descriptionPanel" title="Description">
+        <field name="description" colSpan="12" widget="html" showTitle="false"/>
+      </panel>
+    </panel-tabs>
+
+    <panel name="detailPanel" sidebar="true">
+      <button name="requestBtn" title="Request" icon="fa-bullhorn" showIf="statusSelect == 1"
+        onClick="save,action-purchase-request-group-request-validate-button,action-purchase-request-group-request-button"/>
+      <button name="acceptBtn" title="Accept" icon="fa-check" showIf="statusSelect == 2"
+        onClick="save,action-purchase-request-group-accept-validate-button,action-purchase-request-group-accept-button"/>
       <button name="purchaseBtn" title="Purchase" icon="fa-shopping-cart"
         showIf="statusSelect == 3" onClick="action-purchase-request-group-purchase-button"/>
       <button name="refuseBtn" title="Refuse" icon="fa-times" css="btn-danger"
@@ -164,6 +237,16 @@
 
   <action-method name="action-purchase-request-method-generate-po">
     <call class="com.axelor.apps.purchase.web.PurchaseRequestController" method="generatePo"/>
+  </action-method>
+
+  <action-method name="action-purchase-request-group-request-validate-button">
+    <call class="com.axelor.apps.purchase.web.PurchaseRequestController"
+      method="validateRequestAction"/>
+  </action-method>
+
+  <action-method name="action-purchase-request-group-accept-validate-button">
+    <call class="com.axelor.apps.purchase.web.PurchaseRequestController"
+      method="validateAcceptAction"/>
   </action-method>
 
   <action-view name="action-purchase-request-open-generate-po-wizard"

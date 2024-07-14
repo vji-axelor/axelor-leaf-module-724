@@ -63,6 +63,18 @@
     <view-param name="search-filters" value="purchase-request-filters"/>
   </action-view>
 
+  <!-- Purchase request menus -->
+  <menuitem name="sc-root-purchase-request-validation" parent="sc-root-purchase"
+    if="__config__.app.isApp('purchase-request')" title="purchase requests validation" order="400"
+    icon="fa-bullhorn" icon-background="#b6473f" action="sc.root.purchase.request.validator.all"/>
+
+  <action-view name="sc.root.purchase.request.validator.all"
+    model="com.axelor.apps.purchase.db.PurchaseRequest" title="purchase requests validation">
+    <view type="grid" name="purchase-request-grid"/>
+    <view type="form" name="purchase-request-validator-form"/>
+    <view-param name="search-filters" value="purchase-request-filters"/>
+  </action-view>
+
   <!-- Purchase request menus end -->
 
   <menuitem name="sc-root-purchase-quotations" title="Purchase quotations" order="500"

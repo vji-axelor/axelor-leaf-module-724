@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_6.1.xsd">
+
+  <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+  <entity name="PurchaseRequestValidator" cacheable="true">
+
+    <many-to-one ref="com.axelor.auth.db.User" name="validatorUser" title="Validator"/>
+    <string name="note" title="Note"/>
+    <boolean name="isApproved" title="Is Approved"/>
+    <many-to-one ref="com.axelor.apps.purchase.db.PurchaseRequest"
+      name="purchaseRequest" title="Purchase Request"/>
+
+  </entity>
+
+</domain-models>

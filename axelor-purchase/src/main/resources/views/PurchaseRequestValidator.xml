@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_6.1.xsd">
+
+  <grid name="purchase-request-validator-draft-grid" title="Request Validator" editable="true"
+    model="com.axelor.apps.purchase.db.PurchaseRequestValidator">
+    <field name="validatorUser"
+      domain="self.group.code = 'MANAGER' OR self.group.code = 'COMMITEE'"/>
+    <field name="isApproved" readonly="true"/>
+    <field name="note"/>
+  </grid>
+
+  <grid name="purchase-request-validator-requested-grid" title="Request Validator"
+    editable="true" model="com.axelor.apps.purchase.db.PurchaseRequestValidator">
+    <field name="validatorUser"
+      domain="self.group.code = 'MANAGER' OR self.group.code = 'COMMITEE'"/>
+    <field name="isApproved"/>
+    <field name="note"/>
+  </grid>
+
+  <form name="purchase-request-validator-form" title="Request Validator"
+    model="com.axelor.apps.purchase.db.PurchaseRequestValidator" width="mid">
+    <panel name="mainPanel" colSpan="12" readonly="true">
+      <field name="validatorUser"
+        domain="self.group.code = 'MANAGER' OR self.group.code = 'COMMITEE'"/>
+      <field name="isApproved"/>
+      <field name="note"/>
+    </panel>
+  </form>
+
+
+</object-views>

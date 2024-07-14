@@ -113,9 +113,8 @@
     onLoad="action-group-purchase-order-on-load-actions"
     onNew="action-group-purchase-order-on-new-actions">
     <toolbar>
-      <button name="reportsBtn" title="Reports" icon="fa-print"
-        hideIf="true" readonlyIf="!id"
-        onClick="save,action-purchase-order-method-show-purchase-order"/>
+      <button name="reportsBtn" title="Reports" icon="fa-print" hideIf="true"
+        readonlyIf="!id" onClick="save,action-purchase-order-method-show-purchase-order"/>
     </toolbar>
     <menubar>
       <menu name="reportMenu" title="Reports" icon="fa-print" showTitle="true">

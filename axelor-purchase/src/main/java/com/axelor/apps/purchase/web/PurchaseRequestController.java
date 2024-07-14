@@ -23,6 +23,7 @@ import com.axelor.apps.base.db.repo.TraceBackRepository;
 import com.axelor.apps.base.service.exception.TraceBackService;
 import com.axelor.apps.purchase.db.PurchaseOrder;
 import com.axelor.apps.purchase.db.PurchaseRequest;
+import com.axelor.apps.purchase.db.PurchaseRequestValidator;
 import com.axelor.apps.purchase.db.repo.PurchaseRequestRepository;
 import com.axelor.apps.purchase.exception.PurchaseExceptionMessage;
 import com.axelor.apps.purchase.service.PurchaseRequestService;
@@ -152,6 +153,27 @@ public class PurchaseRequestController {
       response.setReload(true);
     } catch (Exception e) {
       TraceBackService.trace(response, e);
+    }
+  }
+
+  public void validateRequestAction(ActionRequest request, ActionResponse response) {
+    PurchaseRequest purchaseRequest = request.getContext().asType(PurchaseRequest.class);
+    List<PurchaseRequestValidator> PurchaseRequestValidatorList =
+        purchaseRequest.getValidatorUserList();
+    if (PurchaseRequestValidatorList.size() == 0) {
+      response.setError("Please Add validator.");
+    }
+  }
+
+  public void validateAcceptAction(ActionRequest request, ActionResponse response) {
+    PurchaseRequest purchaseRequest = request.getContext().asType(PurchaseRequest.class);
+    List<PurchaseRequestValidator> purchaseRequestValidatorList =
+        purchaseRequest.getValidatorUserList();
+
+    for (PurchaseRequestValidator PurchaseRequestValidator : purchaseRequestValidatorList) {
+      if (!PurchaseRequestValidator.getIsApproved()) {
+        response.setError("Please approve request from all validator.");
+      }
     }
   }
 }

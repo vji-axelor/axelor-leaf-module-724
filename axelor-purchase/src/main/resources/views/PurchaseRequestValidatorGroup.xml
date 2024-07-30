@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_6.1.xsd">
+
+  <grid name="purchase-request-validator-group-grid" title="Request Validator Group" 
+    model="com.axelor.apps.purchase.db.PurchaseRequestValidatorGroup">
+      <field name="name" />
+	  <field name="totalAmount" />
+  </grid>
+
+  <form name="purchase-request-validator-group-form" title="Request Validator Group"
+    model="com.axelor.apps.purchase.db.PurchaseRequestValidatorGroup" width="mid"
+    onLoad="">
+    <panel name="mainPanel" colSpan="12">
+		<field name="name" />
+		<field name="totalAmount" />
+    </panel>
+	<panel-related field="validatorUser" name="validatorUserPanel" title="Validator User" canView="false"/>
+  </form>
+
+
+</object-views>

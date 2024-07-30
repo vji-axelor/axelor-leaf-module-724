@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_6.1.xsd">
+
+  <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+  <entity name="PurchaseRequestValidatorGroup" cacheable="true">
+    <string name="name" title="Name" namecolumn="true"/>
+    <decimal name="totalAmount" title="Total Amount"/>
+    <many-to-many ref="com.axelor.auth.db.User" name="validatorUser" title="Validators"/>
+  </entity>
+
+</domain-models>

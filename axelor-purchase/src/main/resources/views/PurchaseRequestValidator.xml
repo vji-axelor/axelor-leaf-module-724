@@ -6,28 +6,33 @@
   <grid name="purchase-request-validator-draft-grid" title="Request Validator" editable="true"
     model="com.axelor.apps.purchase.db.PurchaseRequestValidator">
     <field name="validatorUser"
-      domain="self.group.code = 'MANAGER' OR self.group.code = 'COMMITEE'"/>
+      domain="self.group.code = 'MANAGER' OR self.group.code = 'COMMITEE'" canView="false"/>
     <field name="isApproved" readonly="true"/>
     <field name="note"/>
   </grid>
 
   <grid name="purchase-request-validator-requested-grid" title="Request Validator"
-    editable="true" model="com.axelor.apps.purchase.db.PurchaseRequestValidator">
+    editable="false" model="com.axelor.apps.purchase.db.PurchaseRequestValidator">
     <field name="validatorUser"
-      domain="self.group.code = 'MANAGER' OR self.group.code = 'COMMITEE'"/>
+      domain="self.group.code = 'MANAGER' OR self.group.code = 'COMMITEE'" canView="false"/>
     <field name="isApproved"/>
     <field name="note"/>
   </grid>
 
   <form name="purchase-request-validator-form" title="Request Validator"
-    model="com.axelor.apps.purchase.db.PurchaseRequestValidator" width="mid">
-    <panel name="mainPanel" colSpan="12" readonly="true">
-      <field name="validatorUser"
-        domain="self.group.code = 'MANAGER' OR self.group.code = 'COMMITEE'"/>
-      <field name="isApproved"/>
-      <field name="note"/>
+    model="com.axelor.apps.purchase.db.PurchaseRequestValidator" width="mid"
+    onLoad="action-purchase-request-validator-set-readonly-on-load">
+    <panel name="mainPanel" colSpan="12">
+      <field name="validatorUser" colSpan="4" readonly="true"
+        domain="self.group.code = 'MANAGER' OR self.group.code = 'COMMITEE'" canView="false"/>
+      <field name="isApproved" colSpan="4"/>
+      <field name="note" colSpan="4"/>
     </panel>
   </form>
 
+  <action-attrs name="action-purchase-request-validator-set-readonly-on-load">
+    <attribute name="readonly" for="isApproved" expr="eval: true"
+      if="validatorUser != __user__"/>
+  </action-attrs>
 
 </object-views>

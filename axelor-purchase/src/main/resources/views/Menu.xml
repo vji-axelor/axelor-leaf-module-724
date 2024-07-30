@@ -71,7 +71,7 @@
   <action-view name="sc.root.purchase.request.validator.all"
     model="com.axelor.apps.purchase.db.PurchaseRequest" title="purchase requests validation">
     <view type="grid" name="purchase-request-grid"/>
-    <view type="form" name="purchase-request-validator-form"/>
+    <view type="form" name="purchase-request-validator-ui-form"/>
     <view-param name="search-filters" value="purchase-request-filters"/>
   </action-view>
 
@@ -168,6 +168,15 @@
       priceList join PartnerPriceList partnerPriceList on priceList member of
       partnerPriceList.priceListSet where priceList.typeSelect = 2 and partnerPriceList.isExclusive
       IS TRUE )</domain>
+  </action-view>
+  
+    <menuitem name="sc-root-purchase-conf-validator-group-list" parent="sc-root-purchase-conf"
+    title="Validator Group" action="sc.root.purchase.conf.validator.group.list" order="200"/>
+
+  <action-view name="sc.root.purchase.conf.validator.group.list" title="Validator Group"
+    model="com.axelor.apps.purchase.db.PurchaseRequestValidatorGroup">
+    <view type="grid" name="purchase-request-validator-group-grid"/>
+    <view type="form" name="purchase-request-validator-group-form"/>
   </action-view>
 
   <!-- TOP MENU -->

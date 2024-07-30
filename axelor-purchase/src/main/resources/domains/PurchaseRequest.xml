@@ -26,6 +26,9 @@
     <one-to-many name="validatorUserList" title="Validator Users"
       ref="com.axelor.apps.purchase.db.PurchaseRequestValidator" mappedBy="purchaseRequest"/>
 
+    <decimal name="totalAmount" title="Total Amount" scale="2" precision="20"
+      readonly="true"/>
+
     <unique-constraint columns="purchaseRequestSeq"/>
 
     <extra-code>

@@ -18,12 +18,6 @@
  */
 package com.axelor.apps.purchase.web;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import com.axelor.apps.base.AxelorException;
 import com.axelor.apps.base.db.repo.TraceBackRepository;
 import com.axelor.apps.base.service.exception.TraceBackService;
@@ -46,6 +40,11 @@ import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 import com.axelor.utils.StringTool;
 import com.google.inject.Singleton;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Singleton
 public class PurchaseRequestController {
@@ -184,58 +183,71 @@ public class PurchaseRequestController {
       }
     }
   }
-  
-  public void calculateToalAmount(ActionRequest request, ActionResponse response) {
-	    PurchaseRequest purchaseRequest = request.getContext().asType(PurchaseRequest.class);
-	    BigDecimal totalAmount = new BigDecimal(0);
-	    for (PurchaseRequestLine purchaseRequestLine : purchaseRequest.getPurchaseRequestLineList()) {
-	    	totalAmount = totalAmount.add(purchaseRequestLine.getQuantity().multiply(purchaseRequestLine.getProduct().getPurchasePrice()));
-	    }
-	    
-	    response.setValue("totalAmount", totalAmount);
-	  }
-  
-  public void setRequestValidator(ActionRequest request, ActionResponse response) {
-	  
-	    PurchaseRequest purchaseRequest = request.getContext().asType(PurchaseRequest.class);
-	    
-	    List<PurchaseRequestValidatorGroup> purchaseRequestValidatorGroupMinList = Beans.get(PurchaseRequestValidatorGroupRepository.class).all().filter("self.totalAmount >= ?",purchaseRequest.getTotalAmount()).fetch();
-	    PurchaseRequestValidatorGroup selectedValidatorGroup = null;
-	    if(purchaseRequestValidatorGroupMinList.size() > 0) {
-	    	//get minumum
-	        PurchaseRequestValidatorGroup minGroup = purchaseRequestValidatorGroupMinList.get(0);
-	        
-	        for (PurchaseRequestValidatorGroup group : purchaseRequestValidatorGroupMinList) {
-	            if (group.getTotalAmount().compareTo(minGroup.getTotalAmount()) < 0) {
-	                minGroup = group;
-	            }
-	        }
-	        selectedValidatorGroup = minGroup;
-	    }else {
-		    List<PurchaseRequestValidatorGroup> purchaseRequestValidatorGroupMaxList = Beans.get(PurchaseRequestValidatorGroupRepository.class).all().filter("self.totalAmount <= ?",purchaseRequest.getTotalAmount()).fetch();
 
-		    if(purchaseRequestValidatorGroupMaxList.size() == 0) {
-		    	response.setError("Please Create purchase request validator group.");
-		    }
-	    	//get maximum
-		    PurchaseRequestValidatorGroup maxGroup = purchaseRequestValidatorGroupMinList.get(0);
-		    for (PurchaseRequestValidatorGroup group : purchaseRequestValidatorGroupMaxList) {
-	            if (group.getTotalAmount().compareTo(maxGroup.getTotalAmount()) > 0) {
-	            	maxGroup = group;
-	            }
-	        }
-	        selectedValidatorGroup = maxGroup;
-	    }
-	    
-	    if(selectedValidatorGroup != null) {
-	    	Set<User> userList = selectedValidatorGroup.getValidatorUser();
-	    	List<PurchaseRequestValidator> purchaseRequestValidatorList = new ArrayList<PurchaseRequestValidator>();
-	    	for(User user : userList) {
-	    		PurchaseRequestValidator purchaseRequestValidator = new PurchaseRequestValidator();
-	    		purchaseRequestValidator.setValidatorUser(user);
-	    		purchaseRequestValidatorList.add(purchaseRequestValidator);
-	    	}
-	    	response.setValue("validatorUserList", purchaseRequestValidatorList);
-	    }
+  public void calculateToalAmount(ActionRequest request, ActionResponse response) {
+    PurchaseRequest purchaseRequest = request.getContext().asType(PurchaseRequest.class);
+    BigDecimal totalAmount = new BigDecimal(0);
+    for (PurchaseRequestLine purchaseRequestLine : purchaseRequest.getPurchaseRequestLineList()) {
+      totalAmount =
+          totalAmount.add(
+              purchaseRequestLine
+                  .getQuantity()
+                  .multiply(purchaseRequestLine.getProduct().getPurchasePrice()));
+    }
+
+    response.setValue("totalAmount", totalAmount);
+  }
+
+  public void setRequestValidator(ActionRequest request, ActionResponse response) {
+
+    PurchaseRequest purchaseRequest = request.getContext().asType(PurchaseRequest.class);
+
+    List<PurchaseRequestValidatorGroup> purchaseRequestValidatorGroupMinList =
+        Beans.get(PurchaseRequestValidatorGroupRepository.class)
+            .all()
+            .filter("self.totalAmount >= ?", purchaseRequest.getTotalAmount())
+            .fetch();
+    PurchaseRequestValidatorGroup selectedValidatorGroup = null;
+    if (purchaseRequestValidatorGroupMinList.size() > 0) {
+      // get minumum
+      PurchaseRequestValidatorGroup minGroup = purchaseRequestValidatorGroupMinList.get(0);
+
+      for (PurchaseRequestValidatorGroup group : purchaseRequestValidatorGroupMinList) {
+        if (group.getTotalAmount().compareTo(minGroup.getTotalAmount()) < 0) {
+          minGroup = group;
+        }
+      }
+      selectedValidatorGroup = minGroup;
+    } else {
+      List<PurchaseRequestValidatorGroup> purchaseRequestValidatorGroupMaxList =
+          Beans.get(PurchaseRequestValidatorGroupRepository.class)
+              .all()
+              .filter("self.totalAmount <= ?", purchaseRequest.getTotalAmount())
+              .fetch();
+
+      if (purchaseRequestValidatorGroupMaxList.size() == 0) {
+        response.setError("Please Create purchase request validator group.");
+      }
+      // get maximum
+      PurchaseRequestValidatorGroup maxGroup = purchaseRequestValidatorGroupMinList.get(0);
+      for (PurchaseRequestValidatorGroup group : purchaseRequestValidatorGroupMaxList) {
+        if (group.getTotalAmount().compareTo(maxGroup.getTotalAmount()) > 0) {
+          maxGroup = group;
+        }
+      }
+      selectedValidatorGroup = maxGroup;
+    }
+
+    if (selectedValidatorGroup != null) {
+      Set<User> userList = selectedValidatorGroup.getValidatorUser();
+      List<PurchaseRequestValidator> purchaseRequestValidatorList =
+          new ArrayList<PurchaseRequestValidator>();
+      for (User user : userList) {
+        PurchaseRequestValidator purchaseRequestValidator = new PurchaseRequestValidator();
+        purchaseRequestValidator.setValidatorUser(user);
+        purchaseRequestValidatorList.add(purchaseRequestValidator);
+      }
+      response.setValue("validatorUserList", purchaseRequestValidatorList);
+    }
   }
 }

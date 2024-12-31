@@ -151,10 +151,12 @@
 					]]>
         </viewer>
       </field>
-      <field name="opportunityType" colSpan="4"/>
-      <field name="opportunityRating" widget="ImageSelect" x-labels="false" colSpan="2"/>
-      <field name="source" colSpan="4" canEdit="false" form-view="source-form"
+      <field name="opportunityType" colSpan="3"/>
+      <field name="opportunityRating" widget="ImageSelect" x-labels="false" colSpan="3"/>
+      <field name="source" colSpan="3" canEdit="false" form-view="source-form"
         grid-view="source-grid"/>
+      <field name="startDate" readonlyIf="salesStageSelect == 5 || salesStageSelect == 6"
+        colSpan="3"/>
       <field name="expectedCloseDate" colSpan="4"
         readonlyIf="$get('opportunityStatus.id') == $closedWonId || $get('opportunityStatus.id') == $closedLostId"/>
       <field name="probability" colSpan="4"
@@ -512,6 +514,7 @@
       != null"/>
     <field name="opportunityStatus"
       expr="eval: __config__.app.getApp('crm')?.opportunityDefaultStatus"/>
+    <field name="startDate" expr="eval:__date__"/>  
   </action-record>
 
   <action-record name="action-opportunity-record-currency"

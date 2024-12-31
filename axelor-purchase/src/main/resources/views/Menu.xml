@@ -169,9 +169,10 @@
       partnerPriceList.priceListSet where priceList.typeSelect = 2 and partnerPriceList.isExclusive
       IS TRUE )</domain>
   </action-view>
-  
-    <menuitem name="sc-root-purchase-conf-validator-group-list" parent="sc-root-purchase-conf"
-    title="Validator Group" action="sc.root.purchase.conf.validator.group.list" order="200"/>
+
+  <menuitem name="sc-root-purchase-conf-validator-group-list"
+    parent="sc-root-purchase-conf" title="Validator Group"
+    action="sc.root.purchase.conf.validator.group.list" order="200"/>
 
   <action-view name="sc.root.purchase.conf.validator.group.list" title="Validator Group"
     model="com.axelor.apps.purchase.db.PurchaseRequestValidatorGroup">

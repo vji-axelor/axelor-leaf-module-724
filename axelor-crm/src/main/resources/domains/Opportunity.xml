@@ -52,6 +52,7 @@
       title="Expected duration of recurring revenue (in months)"/>
     <date name="recurringStartDate" title="Recurring start date"/>
     <date name="recurringEndDate" title="Recurring end date"/>
+    <date name="startDate" title="Start Date"/>
     <integer name="opportunityRating" title="Opportunity scoring"
       selection="gold.rating.icon.select"/>
     <integer name="priority" selection="crm.opportunity.priority.select"/>

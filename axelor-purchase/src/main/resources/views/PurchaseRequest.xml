@@ -45,7 +45,8 @@
     </panel>
     <panel-related field="validatorUserList" readonly="true" canNew="false"
       form-view="purchase-request-validator-form" grid-view="purchase-request-validator-draft-grid"/>
-    <panel-related field="purchaseRequestLineList" onChange="action-purchase-request-method-calculate-total-amount"
+    <panel-related field="purchaseRequestLineList"
+      onChange="action-purchase-request-method-calculate-total-amount"
       form-view="purchase-request-line-form" grid-view="purchase-request-line-grid"/>
     <panel-tabs name="descriptionPanelTab">
       <panel name="descriptionPanel" title="Description">
@@ -53,10 +54,10 @@
       </panel>
     </panel-tabs>
 
-	<panel name="validatorPanel" sidebar="true">
-	  <button name="addValidatorBtn" title="Add Req. Validator" showIf="statusSelect == 1"
+    <panel name="validatorPanel" sidebar="true">
+      <button name="addValidatorBtn" title="Add Req. Validator" showIf="statusSelect == 1"
         onClick="save,action-purchase-request-method-set-request-validator"/>
-	</panel>
+    </panel>
     <panel name="detailPanel" sidebar="true">
       <button name="requestBtn" title="Request" icon="fa-bullhorn" showIf="statusSelect == 1"
         onClick="save,action-purchase-request-group-request-validate-button,action-purchase-request-group-request-button"/>
@@ -73,7 +74,7 @@
     </panel>
     <panel sidebar="true" name="characteristicsPanel" title="Characteristics"
       canCollapse="true">
-      <field name="totalAmount" />
+      <field name="totalAmount"/>
       <field name="stockLocation" canEdit="false"
         domain="self.company = :company and self.typeSelect in (1,2) and self.usableOnPurchaseOrder = true"
         if-module="axelor-supplychain" colSpan="12" form-view="stock-location-form"
@@ -145,7 +146,7 @@
     </panel>
     <panel sidebar="true" name="characteristicsPanel" title="Characteristics"
       canCollapse="true">
-      <field name="totalAmount" />
+      <field name="totalAmount"/>
       <field name="stockLocation" canEdit="false"
         domain="self.company = :company and self.typeSelect in (1,2) and self.usableOnPurchaseOrder = true"
         if-module="axelor-supplychain" colSpan="12" form-view="stock-location-form"
@@ -325,12 +326,14 @@
       if="!__config__.app.getApp('base')?.getEnableMultiCompany()"/>
     <field name="stockLocation" hidden="true" if="!__config__.app.isApp('supplychain')"/>
   </search-filters>
-  
+
   <action-method name="action-purchase-request-method-calculate-total-amount">
-  	<call class="com.axelor.apps.purchase.web.PurchaseRequestController" method="calculateToalAmount"/>
+    <call class="com.axelor.apps.purchase.web.PurchaseRequestController"
+      method="calculateToalAmount"/>
   </action-method>
-	
+
   <action-method name="action-purchase-request-method-set-request-validator">
-  	<call class="com.axelor.apps.purchase.web.PurchaseRequestController" method="setRequestValidator"/>
-  </action-method>	
+    <call class="com.axelor.apps.purchase.web.PurchaseRequestController"
+      method="setRequestValidator"/>
+  </action-method>
 </object-views>

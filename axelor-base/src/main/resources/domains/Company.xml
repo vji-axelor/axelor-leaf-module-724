@@ -60,6 +60,8 @@
     <one-to-many name="emailAccountList" ref="com.axelor.message.db.EmailAccount"
       title="Email accounts" mappedBy="company"/>
     <string name="locale" title="Locale"/>
+    <string name="regNo" title="Reg. No."/>
+    <string name="sstNo" title="SST. No."/>
     <extra-code><![CDATA[
 
 	   	// CATEGORY SELECT

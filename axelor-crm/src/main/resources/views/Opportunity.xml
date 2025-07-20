@@ -514,7 +514,7 @@
       != null"/>
     <field name="opportunityStatus"
       expr="eval: __config__.app.getApp('crm')?.opportunityDefaultStatus"/>
-    <field name="startDate" expr="eval:__date__"/>  
+    <field name="startDate" expr="eval:__date__"/>
   </action-record>
 
   <action-record name="action-opportunity-record-currency"

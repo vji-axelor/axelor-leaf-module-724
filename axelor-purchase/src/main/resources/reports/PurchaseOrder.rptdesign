@@ -55,7 +55,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:5432/axelor_lin634</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axelor_lin</property>
             <property name="odaUser">postgres</property>
             <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
         </oda-data-source>
@@ -237,6 +237,30 @@
                     <text-property name="displayName">fulldeladdress</text-property>
                     <text-property name="heading">fulldeladdress</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">footer</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">footer</text-property>
+                    <text-property name="heading">footer</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">imagelogoname</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">imagelogoname</text-property>
+                    <text-property name="heading">imagelogoname</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">regno</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">regno</text-property>
+                    <text-property name="heading">regno</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sstno</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">sstno</text-property>
+                    <text-property name="heading">sstno</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -395,6 +419,26 @@
                     <structure>
                         <property name="position">29</property>
                         <property name="name">fulldeladdress</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">footer</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">imagelogoname</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">regno</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">sstno</property>
                         <property name="dataType">string</property>
                     </structure>
                 </list-property>
@@ -604,6 +648,34 @@
                     <property name="dataType">string</property>
                     <property name="nativeDataType">12</property>
                 </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">footer</property>
+                    <property name="nativeName">footer</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">imagelogoname</property>
+                    <property name="nativeName">imagelogoname</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">regno</property>
+                    <property name="nativeName">regno</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">33</property>
+                    <property name="name">sstno</property>
+                    <property name="nativeName">sstno</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select PurchaseOrder.id as id,
 PurchaseOrder.purchase_order_seq as SaleSeq,
@@ -638,7 +710,12 @@ PrintingSettings.pdf_header as TermsAndCondition,
 SuppAddress.addressl2 as AddLine0,
 SuppAddress.addressl4 as AddLine1,
 SuppAddress.addressl3 as AddLine2,
-SuppAddress.full_name as FullDelAddress
+SuppAddress.full_name as FullDelAddress,
+
+PrintingSettings.pdf_footer as Footer,
+MetaFileComp.file_name as ImageLogoName,
+Company.reg_no as RegNo,
+Company.sst_no as SstNo
 
 
 
@@ -657,6 +734,9 @@ left outer join base_address as SuppAddress on (SuppAddress.id = PartnerAddress.
 left outer join base_partner as Contact on (Contact.id = PurchaseOrder.contact_partner)
 left outer join message_email_address as ContactEmailAddress on (Contact.email_address = ContactEmailAddress.id)
 left outer join base_printing_settings as PrintingSettings on (PurchaseOrder.printing_settings = PrintingSettings.id)
+
+left outer join base_company as Company on (Company.id = PurchaseOrder.company)
+left outer join meta_file as MetaFileComp on (Company.logo = MetaFileComp.id)
 
 where PurchaseOrder.id = ?
 
@@ -685,22 +765,43 @@ where PurchaseOrder.id = ?
                     <column id="177"/>
                     <row id="178">
                         <cell id="179">
-                            <image id="182">
-                                <property name="marginLeft">0pt</property>
-                                <property name="height">0.36619718309859156in</property>
-                                <property name="width">1.119718309859155in</property>
-                                <property name="source">embed</property>
-                                <property name="imageName">LEAF_LOGO.png</property>
-                            </image>
+                            <text id="4563">
+                                <property name="dataSet">PurchaseOrder</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">imagelogoname</property>
+                                        <text-property name="displayName">imagelogoname</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["imagelogoname"]</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">Column Binding</property>
+                                        <expression name="expression" type="javascript">params["AttachmentPath"].value</expression>
+                                        <property name="dataType">string</property>
+                                        <property name="allowExport">true</property>
+                                    </structure>
+                                </list-property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<VALUE-OF format="HTML">"<IMG src='"+row["Column Binding"] +row["imagelogoname"]+"' width='200' height='100'/>"</VALUE-OF>]]></text-property>
+                            </text>
                         </cell>
                         <cell id="180">
-                            <label id="181">
-                                <property name="fontSize">8pt</property>
-                                <property name="marginTop">20pt</property>
+                            <text id="4823">
+                                <property name="marginTop">25pt</property>
                                 <property name="marginRight">10pt</property>
                                 <property name="textAlign">right</property>
-                                <text-property name="text">Reg. No. 493216-W</text-property>
-                            </label>
+                                <property name="dataSet">PurchaseOrder</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">regno</property>
+                                        <text-property name="displayName">regno</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["regno"]</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
+                                </list-property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<VALUE-OF format="HTML">"<b>Reg. No: </b>"+row["regno"]</VALUE-OF>]]></text-property>
+                            </text>
                         </cell>
                     </row>
                     <row id="4610">
@@ -763,12 +864,67 @@ where PurchaseOrder.id = ?
                                                     </data>
                                                 </cell>
                                                 <cell id="4678">
-                                                    <label id="4630">
-                                                        <property name="marginTop">1pt</property>
+                                                    <text id="4824">
+                                                        <property name="backgroundAttachment">scroll</property>
+                                                        <property name="backgroundPositionX">0%</property>
+                                                        <property name="backgroundPositionY">0%</property>
+                                                        <property name="backgroundRepeat">repeat</property>
+                                                        <property name="fontFamily">serif</property>
+                                                        <property name="fontSize">10pt</property>
+                                                        <property name="fontWeight">normal</property>
+                                                        <property name="fontStyle">normal</property>
+                                                        <property name="fontVariant">normal</property>
+                                                        <property name="color">black</property>
+                                                        <property name="textLineThrough">none</property>
+                                                        <property name="textOverline">none</property>
+                                                        <property name="textUnderline">none</property>
+                                                        <property name="borderBottomColor">black</property>
+                                                        <property name="borderBottomStyle">none</property>
+                                                        <property name="borderBottomWidth">medium</property>
+                                                        <property name="borderLeftColor">black</property>
+                                                        <property name="borderLeftStyle">none</property>
+                                                        <property name="borderLeftWidth">medium</property>
+                                                        <property name="borderRightColor">black</property>
+                                                        <property name="borderRightStyle">none</property>
+                                                        <property name="borderRightWidth">medium</property>
+                                                        <property name="borderTopColor">black</property>
+                                                        <property name="borderTopStyle">none</property>
+                                                        <property name="borderTopWidth">medium</property>
+                                                        <property name="marginTop">0pt</property>
+                                                        <property name="marginLeft">0pt</property>
+                                                        <property name="marginBottom">0pt</property>
                                                         <property name="marginRight">0pt</property>
+                                                        <property name="paddingTop">1pt</property>
+                                                        <property name="paddingLeft">1pt</property>
+                                                        <property name="paddingBottom">1pt</property>
+                                                        <property name="paddingRight">1pt</property>
                                                         <property name="textAlign">right</property>
-                                                        <text-property name="text">SST No : B16-1808-32000816 </text-property>
-                                                    </label>
+                                                        <property name="letterSpacing">normal</property>
+                                                        <property name="lineHeight">normal</property>
+                                                        <property name="orphans">2</property>
+                                                        <property name="textTransform">none</property>
+                                                        <property name="whiteSpace">normal</property>
+                                                        <property name="widows">2</property>
+                                                        <property name="wordSpacing">normal</property>
+                                                        <property name="display">block</property>
+                                                        <property name="pageBreakAfter">auto</property>
+                                                        <property name="pageBreakBefore">auto</property>
+                                                        <property name="pageBreakInside">auto</property>
+                                                        <property name="showIfBlank">false</property>
+                                                        <property name="canShrink">false</property>
+                                                        <property name="overflow">hidden</property>
+                                                        <property name="dataSet">PurchaseOrder</property>
+                                                        <list-property name="boundDataColumns">
+                                                            <structure>
+                                                                <property name="name">sstno</property>
+                                                                <text-property name="displayName">sstno</text-property>
+                                                                <expression name="expression" type="javascript">dataSetRow["sstno"]</expression>
+                                                                <property name="dataType">string</property>
+                                                            </structure>
+                                                        </list-property>
+                                                        <property name="contentType">html</property>
+                                                        <text-property name="content"><![CDATA[<VALUE-OF format="HTML">"<b>SST No: </b>"+row["sstno"]</VALUE-OF>]]></text-property>
+                                                    </text>
                                                 </cell>
                                             </row>
                                         </grid>
@@ -1496,19 +1652,20 @@ where PurchaseOrder.id = ?
                                             </list-property>
                                             <property name="resultSetColumn">SalePersonName</property>
                                         </data>
-                                        <label id="4583">
+                                        <text id="4822">
                                             <property name="marginTop">3pt</property>
-                                            <text-property name="text">LIAN SHUN TECHNOLOGY (M) SDN BHD</text-property>
-                                        </label>
-                                        <label id="4584">
-                                            <property name="fontSize">9pt</property>
-                                            <property name="marginTop">3pt</property>
-                                            <text-property name="text">2nd Floor 3-10-3 NO 14 Persiaran Anggerik Vanilla</text-property>
-                                        </label>
-                                        <label id="4585">
-                                            <property name="fontSize">9pt</property>
-                                            <text-property name="text">Kota Kemuning 40460 Shah Alam Selangor Malaysia</text-property>
-                                        </label>
+                                            <property name="dataSet">PurchaseOrder</property>
+                                            <list-property name="boundDataColumns">
+                                                <structure>
+                                                    <property name="name">footer</property>
+                                                    <text-property name="displayName">footer</text-property>
+                                                    <expression name="expression" type="javascript">dataSetRow["footer"]</expression>
+                                                    <property name="dataType">string</property>
+                                                </structure>
+                                            </list-property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[<value-of format="HTML"> row["footer"].replace(/\<p|\<P/g, '<p style="margin-top: 0; margin-bottom:0.1em;" ').replace(/<!--\w+-->/gi,"")</value-of>]]></text-property>
+                                        </text>
                                     </cell>
                                     <cell id="4586">
                                         <label id="4587">

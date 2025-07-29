@@ -796,7 +796,8 @@ where SaleOrder.id = ?
     </data-sets>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
-            <property name="headerHeight">0.75in</property>
+            <property name="headerHeight">1.2in</property>
+            <property name="footerHeight">1.8in</property>
             <page-header>
                 <grid id="175">
                     <property name="borderBottomStyle">solid</property>
@@ -840,7 +841,11 @@ where SaleOrder.id = ?
                                     </structure>
                                 </list-property>
                                 <property name="contentType">html</property>
-                                <text-property name="content"><![CDATA[<VALUE-OF format="HTML">"<b>Reg. No: </b>"+row["regno"]</VALUE-OF>]]></text-property>
+                                <text-property name="content"><![CDATA[<VALUE-OF format="HTML">
+  if (row["regno"] != null) {
+    "<b>Reg. No: </b>" + row["regno"];
+  }
+</VALUE-OF>]]></text-property>
                             </text>
                             <text id="4633">
                                 <property name="backgroundAttachment">scroll</property>
@@ -901,12 +906,165 @@ where SaleOrder.id = ?
                                     </structure>
                                 </list-property>
                                 <property name="contentType">html</property>
-                                <text-property name="content"><![CDATA[<VALUE-OF format="HTML">"<b>SST No: </b>"+row["sstno"]</VALUE-OF>]]></text-property>
+                                <text-property name="content"><![CDATA[<VALUE-OF format="HTML">
+  if (row["sstno"] != null) {
+    "<b>SST No: </b>" + row["sstno"];
+  }
+</VALUE-OF>]]></text-property>
                             </text>
                         </cell>
                     </row>
                 </grid>
             </page-header>
+            <page-footer>
+                <grid id="157">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="marginTop">5pt</property>
+                    <property name="pageBreakInside">avoid</property>
+                    <property name="width">7.971830985915493in</property>
+                    <list-property name="boundDataColumns">
+                        <structure>
+                            <property name="name">Column Binding</property>
+                            <expression name="expression" type="javascript">params["AttachmentPath"].value+"test.png"</expression>
+                            <property name="dataType">string</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                        <structure>
+                            <property name="name">Column Binding_1</property>
+                            <expression name="expression" type="javascript">params["AttachmentPath"].value+"test.png"</expression>
+                            <property name="dataType">string</property>
+                            <property name="allowExport">true</property>
+                        </structure>
+                    </list-property>
+                    <column id="158">
+                        <property name="width">4.366197183098592in</property>
+                    </column>
+                    <column id="159"/>
+                    <row id="160">
+                        <cell id="161">
+                            <label id="163">
+                                <property name="fontSize">11pt</property>
+                                <text-property name="text">Approved by:</text-property>
+                            </label>
+                            <text id="4559">
+                                <property name="dataSet">SaleOrder</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">Column Binding</property>
+                                        <expression name="expression" type="javascript">params["AttachmentPath"].value</expression>
+                                        <property name="dataType">string</property>
+                                        <property name="allowExport">true</property>
+                                    </structure>
+                                    <structure>
+                                        <property name="name">Column Binding_1</property>
+                                        <expression name="expression" type="javascript">dataSetRow["imagename"]</expression>
+                                        <property name="dataType">string</property>
+                                        <property name="allowExport">true</property>
+                                    </structure>
+                                </list-property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<VALUE-OF format="HTML">"<IMG src='"+params["AttachmentPath"].value + row["Column Binding_1"]+"' alt=' ' width='200' height='100'/>"</VALUE-OF>]]></text-property>
+                            </text>
+                            <data id="183">
+                                <property name="backgroundAttachment">scroll</property>
+                                <property name="backgroundPositionX">0%</property>
+                                <property name="backgroundPositionY">0%</property>
+                                <property name="backgroundRepeat">repeat</property>
+                                <property name="fontFamily">serif</property>
+                                <property name="fontSize">10pt</property>
+                                <property name="fontWeight">normal</property>
+                                <property name="fontStyle">normal</property>
+                                <property name="fontVariant">normal</property>
+                                <property name="color">black</property>
+                                <property name="textLineThrough">none</property>
+                                <property name="textOverline">none</property>
+                                <property name="textUnderline">none</property>
+                                <property name="borderBottomColor">black</property>
+                                <property name="borderBottomStyle">none</property>
+                                <property name="borderBottomWidth">medium</property>
+                                <property name="borderLeftColor">black</property>
+                                <property name="borderLeftStyle">none</property>
+                                <property name="borderLeftWidth">medium</property>
+                                <property name="borderRightColor">black</property>
+                                <property name="borderRightStyle">none</property>
+                                <property name="borderRightWidth">medium</property>
+                                <property name="borderTopColor">black</property>
+                                <property name="borderTopStyle">none</property>
+                                <property name="borderTopWidth">medium</property>
+                                <property name="marginTop">2pt</property>
+                                <property name="marginLeft">0pt</property>
+                                <property name="marginBottom">0pt</property>
+                                <property name="marginRight">0pt</property>
+                                <property name="paddingTop">1pt</property>
+                                <property name="paddingLeft">1pt</property>
+                                <property name="paddingBottom">1pt</property>
+                                <property name="paddingRight">1pt</property>
+                                <property name="letterSpacing">normal</property>
+                                <property name="lineHeight">normal</property>
+                                <property name="orphans">2</property>
+                                <property name="textTransform">none</property>
+                                <property name="whiteSpace">normal</property>
+                                <property name="widows">2</property>
+                                <property name="wordSpacing">normal</property>
+                                <property name="display">block</property>
+                                <property name="pageBreakAfter">auto</property>
+                                <property name="pageBreakBefore">auto</property>
+                                <property name="pageBreakInside">auto</property>
+                                <property name="showIfBlank">false</property>
+                                <property name="canShrink">false</property>
+                                <property name="overflow">hidden</property>
+                                <property name="dataSet">SaleOrder</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">SalePersonName</property>
+                                        <expression name="expression" type="javascript">BirtStr.toUpper(dataSetRow["salepersonname"])</expression>
+                                        <property name="dataType">string</property>
+                                        <property name="allowExport">true</property>
+                                    </structure>
+                                </list-property>
+                                <property name="resultSetColumn">SalePersonName</property>
+                            </data>
+                            <text id="4574">
+                                <property name="marginTop">0pt</property>
+                                <property name="dataSet">SaleOrder</property>
+                                <list-property name="boundDataColumns">
+                                    <structure>
+                                        <property name="name">footer</property>
+                                        <text-property name="displayName">footer</text-property>
+                                        <expression name="expression" type="javascript">dataSetRow["footer"]</expression>
+                                        <property name="dataType">string</property>
+                                    </structure>
+                                </list-property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[<value-of format="HTML"> row["footer"].replace(/\<p|\<P/g, '<p style="margin-top: 0; margin-bottom:0.1em;" ').replace(/<!--\w+-->/gi,"")</value-of>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="162">
+                            <label id="170">
+                                <property name="fontSize">11pt</property>
+                                <property name="marginTop">38pt</property>
+                                <text-property name="text">Customer Signature :_____________________</text-property>
+                            </label>
+                            <label id="172">
+                                <property name="fontSize">11pt</property>
+                                <property name="marginTop">3pt</property>
+                                <text-property name="text">DATE : _______________________________</text-property>
+                            </label>
+                            <label id="173">
+                                <property name="fontSize">11pt</property>
+                                <property name="marginTop">3pt</property>
+                                <text-property name="text">Full Name: ____________________________</text-property>
+                            </label>
+                            <label id="174">
+                                <property name="fontSize">11pt</property>
+                                <property name="marginTop">4pt</property>
+                                <text-property name="text">IC numbers :___________________________</text-property>
+                            </label>
+                        </cell>
+                    </row>
+                </grid>
+            </page-footer>
         </simple-master-page>
     </page-setup>
     <body>
@@ -1911,153 +2069,6 @@ where SaleOrder.id = ?
                         <property name="textUnderline">underline</property>
                         <property name="marginBottom">30pt</property>
                         <text-property name="text">Remark:</text-property>
-                    </label>
-                </cell>
-            </row>
-        </grid>
-        <grid id="157">
-            <property name="borderBottomStyle">solid</property>
-            <property name="borderBottomWidth">thin</property>
-            <property name="marginTop">5pt</property>
-            <property name="pageBreakInside">avoid</property>
-            <property name="width">7.971830985915493in</property>
-            <list-property name="boundDataColumns">
-                <structure>
-                    <property name="name">Column Binding</property>
-                    <expression name="expression" type="javascript">params["AttachmentPath"].value+"test.png"</expression>
-                    <property name="dataType">string</property>
-                    <property name="allowExport">true</property>
-                </structure>
-                <structure>
-                    <property name="name">Column Binding_1</property>
-                    <expression name="expression" type="javascript">params["AttachmentPath"].value+"test.png"</expression>
-                    <property name="dataType">string</property>
-                    <property name="allowExport">true</property>
-                </structure>
-            </list-property>
-            <column id="158">
-                <property name="width">4.366197183098592in</property>
-            </column>
-            <column id="159"/>
-            <row id="160">
-                <cell id="161">
-                    <label id="163">
-                        <property name="fontSize">11pt</property>
-                        <text-property name="text">Approved by:</text-property>
-                    </label>
-                    <text id="4559">
-                        <property name="dataSet">SaleOrder</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">Column Binding</property>
-                                <expression name="expression" type="javascript">params["AttachmentPath"].value</expression>
-                                <property name="dataType">string</property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                            <structure>
-                                <property name="name">Column Binding_1</property>
-                                <expression name="expression" type="javascript">dataSetRow["imagename"]</expression>
-                                <property name="dataType">string</property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                        </list-property>
-                        <property name="contentType">html</property>
-                        <text-property name="content"><![CDATA[<VALUE-OF format="HTML">"<IMG src='"+params["AttachmentPath"].value + row["Column Binding_1"]+"' width='200' height='100'/>"</VALUE-OF>]]></text-property>
-                    </text>
-                    <data id="183">
-                        <property name="backgroundAttachment">scroll</property>
-                        <property name="backgroundPositionX">0%</property>
-                        <property name="backgroundPositionY">0%</property>
-                        <property name="backgroundRepeat">repeat</property>
-                        <property name="fontFamily">serif</property>
-                        <property name="fontSize">10pt</property>
-                        <property name="fontWeight">normal</property>
-                        <property name="fontStyle">normal</property>
-                        <property name="fontVariant">normal</property>
-                        <property name="color">black</property>
-                        <property name="textLineThrough">none</property>
-                        <property name="textOverline">none</property>
-                        <property name="textUnderline">none</property>
-                        <property name="borderBottomColor">black</property>
-                        <property name="borderBottomStyle">none</property>
-                        <property name="borderBottomWidth">medium</property>
-                        <property name="borderLeftColor">black</property>
-                        <property name="borderLeftStyle">none</property>
-                        <property name="borderLeftWidth">medium</property>
-                        <property name="borderRightColor">black</property>
-                        <property name="borderRightStyle">none</property>
-                        <property name="borderRightWidth">medium</property>
-                        <property name="borderTopColor">black</property>
-                        <property name="borderTopStyle">none</property>
-                        <property name="borderTopWidth">medium</property>
-                        <property name="marginTop">2pt</property>
-                        <property name="marginLeft">0pt</property>
-                        <property name="marginBottom">0pt</property>
-                        <property name="marginRight">0pt</property>
-                        <property name="paddingTop">1pt</property>
-                        <property name="paddingLeft">1pt</property>
-                        <property name="paddingBottom">1pt</property>
-                        <property name="paddingRight">1pt</property>
-                        <property name="letterSpacing">normal</property>
-                        <property name="lineHeight">normal</property>
-                        <property name="orphans">2</property>
-                        <property name="textTransform">none</property>
-                        <property name="whiteSpace">normal</property>
-                        <property name="widows">2</property>
-                        <property name="wordSpacing">normal</property>
-                        <property name="display">block</property>
-                        <property name="pageBreakAfter">auto</property>
-                        <property name="pageBreakBefore">auto</property>
-                        <property name="pageBreakInside">auto</property>
-                        <property name="showIfBlank">false</property>
-                        <property name="canShrink">false</property>
-                        <property name="overflow">hidden</property>
-                        <property name="dataSet">SaleOrder</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">SalePersonName</property>
-                                <expression name="expression" type="javascript">BirtStr.toUpper(dataSetRow["salepersonname"])</expression>
-                                <property name="dataType">string</property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                        </list-property>
-                        <property name="resultSetColumn">SalePersonName</property>
-                    </data>
-                    <text id="4574">
-                        <property name="marginTop">0pt</property>
-                        <property name="dataSet">SaleOrder</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">footer</property>
-                                <text-property name="displayName">footer</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["footer"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                        </list-property>
-                        <property name="contentType">html</property>
-                        <text-property name="content"><![CDATA[<value-of format="HTML"> row["footer"].replace(/\<p|\<P/g, '<p style="margin-top: 0; margin-bottom:0.1em;" ').replace(/<!--\w+-->/gi,"")</value-of>]]></text-property>
-                    </text>
-                </cell>
-                <cell id="162">
-                    <label id="170">
-                        <property name="fontSize">11pt</property>
-                        <property name="marginTop">38pt</property>
-                        <text-property name="text">Customer Signature :_____________________</text-property>
-                    </label>
-                    <label id="172">
-                        <property name="fontSize">11pt</property>
-                        <property name="marginTop">3pt</property>
-                        <text-property name="text">DATE : _______________________________</text-property>
-                    </label>
-                    <label id="173">
-                        <property name="fontSize">11pt</property>
-                        <property name="marginTop">3pt</property>
-                        <text-property name="text">Full Name: ____________________________</text-property>
-                    </label>
-                    <label id="174">
-                        <property name="fontSize">11pt</property>
-                        <property name="marginTop">4pt</property>
-                        <text-property name="text">IC numbers :___________________________</text-property>
                     </label>
                 </cell>
             </row>

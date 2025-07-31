@@ -18,20 +18,6 @@
  */
 package com.axelor.apps.purchase.web;
 
-import java.lang.invoke.MethodHandles;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import javax.annotation.Nullable;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.axelor.app.AppSettings;
 import com.axelor.apps.ReportFactory;
 import com.axelor.apps.account.db.FiscalPosition;
@@ -71,13 +57,22 @@ import com.axelor.meta.schema.actions.ActionView.ActionViewBuilder;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 import com.axelor.rpc.Context;
-import com.axelor.rpc.Request;
 import com.axelor.utils.db.Wizard;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.inject.Singleton;
+
+import java.io.File;
+import java.lang.invoke.MethodHandles;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import javax.annotation.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Singleton
 public class PurchaseOrderController {
@@ -583,13 +578,17 @@ public class PurchaseOrderController {
       throws AxelorException {
     PurchaseOrder purchaseOrder = request.getContext().asType(PurchaseOrder.class);
     
+    AppSettings appSettings = AppSettings.get();
+    String fileUploadDir = appSettings.get("data.upload.dir");
+    String tenantId =  purchaseOrder.getCompany().getTenantId();
+
     String fileLink =
         ReportFactory.createReport("PurchaseOrderQuote.rptdesign", "Quotation")
             .addParam("PurchaseOrderId", purchaseOrder.getId())
+            .addParam("AttachmentPath", fileUploadDir+File.separator+tenantId+File.separator)
             .generate()
             .getFileLink();
 
     response.setView(ActionView.define("Quotation").add("html", fileLink).map());
   }
-  
 }

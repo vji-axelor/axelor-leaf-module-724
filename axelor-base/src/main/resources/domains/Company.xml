@@ -62,6 +62,7 @@
     <string name="locale" title="Locale"/>
     <string name="regNo" title="Reg. No."/>
     <string name="sstNo" title="SST. No."/>
+    <string name="tenantId" title="Tenant Id"/>
     <extra-code><![CDATA[
 
 	   	// CATEGORY SELECT

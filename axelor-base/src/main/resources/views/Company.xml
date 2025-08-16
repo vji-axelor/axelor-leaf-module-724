@@ -80,7 +80,7 @@
       <panel name="informationsPanel" title="Information">
         <field name="regNo"/>
         <field name="sstNo"/>
-        <field name="tenantId" />
+        <field name="tenantId"/>
         <field name="notes" colSpan="12"/>
         <field name="companyDepartmentList" grid-view="company-department-company-grid"
           form-view="company-department-company-form" canSelect="true" domain="self.company IS NULL"

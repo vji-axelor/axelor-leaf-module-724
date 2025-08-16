@@ -69,7 +69,6 @@ import com.axelor.utils.db.Wizard;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.inject.Singleton;
-
 import java.io.File;
 import java.lang.invoke.MethodHandles;
 import java.math.BigDecimal;
@@ -80,8 +79,6 @@ import java.util.Map.Entry;
 import java.util.Optional;
 import java.util.Set;
 import javax.annotation.Nullable;
-
-import org.apache.batik.dom.svg.SVGZoomAndPanSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -736,14 +733,14 @@ public class SaleOrderController {
 
     AppSettings appSettings = AppSettings.get();
     String fileUploadDir = appSettings.get("data.upload.dir");
-    String tenantId =  saleOrder.getCompany().getTenantId();
-    
+    String tenantId = saleOrder.getCompany().getTenantId();
+
     String fileLink =
         ReportFactory.createReport("SaleOrder_Do.rptdesign", "Delivery Order")
             // .addParam("StartDate", Date.valueOf(startDate))
             // .addParam("EndDate", Date.valueOf(endtDate))
             .addParam("SaleOrderId", saleOrder.getId())
-            .addParam("AttachmentPath", fileUploadDir+File.separator+tenantId+File.separator)
+            .addParam("AttachmentPath", fileUploadDir + File.separator + tenantId + File.separator)
             .addParam(
                 "Timezone",
                 saleOrder.getCompany() != null ? saleOrder.getCompany().getTimezone() : null)

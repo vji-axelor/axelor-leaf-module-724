@@ -738,6 +738,7 @@
           <field name="mainPartner"
             domain="self.isContact = false  AND self in (SELECT p FROM Partner p join p.companySet c where c in :companySet AND p.partnerTypeSelect = 1)"
             form-view="partner-form" grid-view="partner-grid"/>
+            <field name="designation"/>
         </panel>
         <field name="isContact" hidden="true" colSpan="12"/>
       </panel>

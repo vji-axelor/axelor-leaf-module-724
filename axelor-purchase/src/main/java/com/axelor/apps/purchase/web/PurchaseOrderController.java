@@ -63,7 +63,6 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.inject.Singleton;
-
 import java.io.File;
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
@@ -577,15 +576,15 @@ public class PurchaseOrderController {
   public void printPurchaseOrderQuote(ActionRequest request, ActionResponse response)
       throws AxelorException {
     PurchaseOrder purchaseOrder = request.getContext().asType(PurchaseOrder.class);
-    
+
     AppSettings appSettings = AppSettings.get();
     String fileUploadDir = appSettings.get("data.upload.dir");
-    String tenantId =  purchaseOrder.getCompany().getTenantId();
+    String tenantId = purchaseOrder.getCompany().getTenantId();
 
     String fileLink =
         ReportFactory.createReport("PurchaseOrderQuote.rptdesign", "Quotation")
             .addParam("PurchaseOrderId", purchaseOrder.getId())
-            .addParam("AttachmentPath", fileUploadDir+File.separator+tenantId+File.separator)
+            .addParam("AttachmentPath", fileUploadDir + File.separator + tenantId + File.separator)
             .generate()
             .getFileLink();
 

@@ -738,7 +738,7 @@
           <field name="mainPartner"
             domain="self.isContact = false  AND self in (SELECT p FROM Partner p join p.companySet c where c in :companySet AND p.partnerTypeSelect = 1)"
             form-view="partner-form" grid-view="partner-grid"/>
-            <field name="designation"/>
+          <field name="designation"/>
         </panel>
         <field name="isContact" hidden="true" colSpan="12"/>
       </panel>
@@ -748,8 +748,9 @@
 
     <panel-tabs name="mainPanelTab">
       <panel name="contactDetailsPanel" title="Contact details">
-        <field name="jobTitleFunction" onChange="action-record-base-partner-set-business-card"/>
-        <field name="functionBusinessCard"/>
+        <field name="jobTitleFunction" onChange="action-record-base-partner-set-business-card" colSpan="4"/>
+        <field name="functionBusinessCard" colSpan="4"/>
+        <field name="partnerSkills" widget="tag-select" colSpan="4" canNew="true" canEdit="true" form-view="partner-skill-form" grid-view="partner-skill-grid"/>
         <field name="reportsTo" domain="self.isContact = true"/>
         <field name="fixedPhone" widget="phone" x-placeholder-number-type="FIXED_LINE"/>
         <field name="mobilePhone" widget="phone"/>

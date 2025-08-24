@@ -750,7 +750,6 @@
       <panel name="contactDetailsPanel" title="Contact details">
         <field name="jobTitleFunction" onChange="action-record-base-partner-set-business-card" colSpan="4"/>
         <field name="functionBusinessCard" colSpan="4"/>
-        <field name="partnerSkills" widget="tag-select" colSpan="4" canNew="true" canEdit="true" form-view="partner-skill-form" grid-view="partner-skill-grid"/>
         <field name="reportsTo" domain="self.isContact = true"/>
         <field name="fixedPhone" widget="phone" x-placeholder-number-type="FIXED_LINE"/>
         <field name="mobilePhone" widget="phone"/>
@@ -797,6 +796,9 @@
       </panel>
       <panel-dashlet name="contactPartnerPanel"
         action="action-contact-partner-dashlet" title="Partners"/>
+      <panel name="skillPanel" title="Skill">
+      	<panel-related field="partnerSkills"  colSpan="12" canNew="true" canEdit="true" form-view="partner-skill-form" grid-view="partner-skill-grid"/>
+      </panel>  
     </panel-tabs>
 
     <panel name="employeePanel" hidden="true" sidebar="true">

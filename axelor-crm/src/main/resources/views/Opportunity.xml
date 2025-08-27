@@ -22,9 +22,11 @@
     <field name="tradingName" form-view="trading-name-form" grid-view="trading-name-grid"
       if="__config__.app.getApp('base')?.enableTradingNamesManagement"/>
     <field name="partner" form-view="partner-form" grid-view="partner-grid"/>
+    <field name="team"/>
     <field name="opportunityStatus"/>
     <field name="amount" aggregate="sum"/>
     <field name="probability" aggregate="avg" widget="Progress"/>
+    <field name="startDate"/>
     <field name="expectedCloseDate"/>
     <field name="updatedOn"/>
     <field name="user" form-view="user-form" grid-view="user-grid"/>
@@ -60,8 +62,10 @@
     <field name="createdOn" hidden="true"/>
     <field name="partner" form-view="partner-form" grid-view="partner-grid"/>
     <field name="opportunityStatus"/>
+    <field name="team"/>
     <field name="amount" aggregate="sum"/>
     <field name="probability" aggregate="avg" widget="Progress"/>
+    <field name="startDate"/>
     <field name="expectedCloseDate"/>
     <field name="$closedWonId" hidden="true"/>
     <field name="$closedLostId" hidden="true"/>

@@ -1153,7 +1153,7 @@ text.replace('PO','PQ');</expression>
                         <property name="fontSize">9pt</property>
                         <property name="fontWeight">bold</property>
                         <property name="marginLeft">3pt</property>
-                        <text-property name="text">Customers Name:</text-property>
+                        <text-property name="text">Company Name:</text-property>
                     </label>
                 </cell>
                 <cell id="4640">

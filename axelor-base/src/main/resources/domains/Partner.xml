@@ -133,7 +133,8 @@
     <one-to-many name="managedForPartnerLinkList"
       ref="com.axelor.apps.base.db.PartnerLink" title="Managed for" mappedBy="partner2"/>
     <string name="custumerRefNumber" title="Customer Ref Number"/>
-    <string name="designation" title="Designation"/>
+    <many-to-one ref="com.axelor.apps.base.db.PartnerDesignation" name="designation"
+      title="Designation"/>
     <many-to-many ref="com.axelor.apps.base.db.PartnerSkill" name="partnerSkills"
       title="Skills"/>
 

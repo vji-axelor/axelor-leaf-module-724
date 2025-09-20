@@ -407,7 +407,7 @@
           onChange="action-sale-order-group-client-partner-change,action-sale-order-record-compute-end-of-validity-date"
           onSelect="action-sale-order-method-set-client-partner-domain" form-view="partner-form"
           grid-view="partner-grid" colSpan="3"/>
-        <field name="contactPartner" colSpan="3" hideIf="company == null"
+        <field name="contactPartner" colSpan="3" hideIf="company == null" required="true"
           onChange="action-record-so-contact-partner-change"
           onSelect="action-sale-order-domain-on-contact-partner" domain="self.isContact = true"
           canEdit="false" form-view="partner-contact-form" grid-view="partner-contact-grid"/>
@@ -935,7 +935,7 @@
         <field name="clientPartner" onChange="action-sale-order-group-client-partner-change"
           onSelect="action-sale-order-method-set-client-partner-domain" form-view="partner-form"
           grid-view="partner-grid"/>
-        <field name="contactPartner" onChange="action-record-so-contact-partner-change"
+        <field name="contactPartner" onChange="action-record-so-contact-partner-change" required="true"
           onSelect="action-sale-order-domain-on-contact-partner" domain="self.isContact = true"
           form-view="partner-contact-form" grid-view="partner-contact-grid"/>
         <panel name="mainInvoicingAddressPanel" stacked="true">

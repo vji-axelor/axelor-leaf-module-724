@@ -753,7 +753,7 @@
         <field name="functionBusinessCard" colSpan="4"/>
         <field name="reportsTo" domain="self.isContact = true"/>
         <field name="fixedPhone" widget="phone" x-placeholder-number-type="FIXED_LINE"/>
-        <field name="mobilePhone" widget="phone"/>
+        <field name="mobilePhone" widget="phone" required="true"/>
         <field name="emailAddress" canSelect="false" form-view="email-address-simple-form"
           x-show-icons="false">
           <editor x-show-titles="false">

@@ -178,7 +178,7 @@
           onChange="action-group-purchase-order-partner-onchange" readonlyIf="statusSelect >= 3"
           onSelect="action-set-supplier-partner-domain" form-view="partner-form"
           grid-view="partner-grid"/>
-        <field name="contactPartner" onChange="action-record-po-contact-partner-change"
+        <field name="contactPartner" onChange="action-record-po-contact-partner-change" required="true"
           onSelect="action-attrs-po-domain-on-contact-partner" domain="self.isContact = true"
           colSpan="3" form-view="partner-contact-form" grid-view="partner-contact-grid"
           hideIf="company == null"/>

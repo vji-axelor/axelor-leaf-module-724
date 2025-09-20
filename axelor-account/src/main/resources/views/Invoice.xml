@@ -515,7 +515,7 @@
         onChange="action-invoice-group-partner-onchange"
         onSelect="action-invoice-method-set-partner-domain" form-view="partner-form"
         grid-view="partner-grid"/>
-      <field name="contactPartner" colSpan="4" canEdit="false"
+      <field name="contactPartner" colSpan="4" canEdit="false" required="true"
         onSelect="action-set-partner-domain"
         domain="self.isContact = true AND :company member of self.companySet"
         readonlyIf="partner != null &amp;&amp; partner.partnerTypeSelect == 2"
@@ -1150,7 +1150,7 @@ InvoiceSet.length > 0))"
         readonlyIf="statusSelect != 1"
         onChange="action-group-account-invoice-partner-onchange-client"
         onSelect="action-invoice-method-set-partner-domain" canView="false"/>
-      <field name="contactPartner" canEdit="false" onSelect="action-set-partner-domain"
+      <field name="contactPartner" canEdit="false" onSelect="action-set-partner-domain" required="true"
         domain="self.isContact = true AND :company member of self.companySet"
         form-view="partner-contact-form" grid-view="partner-contact-grid"
         readonlyIf="partner != null &amp;&amp; partner.partnerTypeSelect == 2" canView="false"/>

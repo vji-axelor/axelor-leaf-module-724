@@ -255,10 +255,10 @@
           domain="self.isContact = true AND :company member of self.companySet"
           form-view="partner-contact-form" grid-view="partner-contact-grid"
           onChange="action-opportunity-record-set-lead-onchange"/>
-        <field name="lead" canEdit="false"
-          readonlyIf="salesStageSelect == 5 || salesStageSelect == 6" form-view="lead-form"
-          grid-view="lead-grid" onChange="action-opportunity-record-set-partner-onchange"/>
+        <field name="opportunityLead" form-view="lead-form"
+          grid-view="lead-grid" />
         <field name="updatedOn"/>
+        <field name="projectOpportunity" readonly="true"/>
       </panel>
       <panel name="postitPanel" title="Memo" canCollapse="true">
         <field name="memo" showTitle="false" colSpan="12"/>
@@ -629,6 +629,8 @@
       if="opportunityStatus.id == __config__.app.getApp('crm')?.closedLostOpportunityStatus?.id"/>
     <action name="action-opportunity-record-clear-lost-reason"
       if="opportunityStatus.id != __config__.app.getApp('crm')?.closedLostOpportunityStatus?.id &amp;&amp; lostReason != null"/>
+    <action name="action-opportunity-view-opportunity-win-popup-set-project"
+      if="opportunityStatus.id == __config__.app.getApp('crm')?.closedWinOpportunityStatus?.id"/>
   </action-group>
 
   <action-record name="action-opportunity-record-set-closed-lost-status"

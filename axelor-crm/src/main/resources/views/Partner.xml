@@ -416,6 +416,7 @@
     </menubar>
     <field name="partnerSeq" width="120"/>
     <field name="simpleFullName" width="300"/>
+    <field name="updatedOn"/>
     <field name="fixedPhone" widget="phone" x-placeholder-number-type="FIXED_LINE"/>
     <field name="emailAddress.address" title="Email" placeholder="whatever@example.com"/>
     <field name="partnerCategory" form-view="partner-category-form"

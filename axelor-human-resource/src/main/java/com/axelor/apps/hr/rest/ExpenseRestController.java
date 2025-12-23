@@ -30,14 +30,12 @@ import com.axelor.apps.hr.service.expense.ExpenseCreateService;
 import com.axelor.apps.hr.service.expense.ExpenseRefusalService;
 import com.axelor.apps.hr.service.expense.ExpenseToolService;
 import com.axelor.apps.hr.service.expense.ExpenseValidateService;
-import com.axelor.i18n.I18n;
 import com.axelor.inject.Beans;
 import com.axelor.utils.api.HttpExceptionHandler;
 import com.axelor.utils.api.ObjectFinder;
 import com.axelor.utils.api.RequestValidator;
 import com.axelor.utils.api.ResponseConstructor;
 import com.axelor.utils.api.SecurityCheck;
-import com.axelor.web.ITranslation;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.servers.Server;
@@ -168,8 +166,6 @@ public class ExpenseRestController {
     Expense expense = ObjectFinder.find(Expense.class, expenseId, ObjectFinder.NO_VERSION);
 
     return ResponseConstructor.build(
-        Response.Status.OK,
-        I18n.get(ITranslation.CHECK_RESPONSE_RESPONSE),
-        Beans.get(ExpenseCheckResponseService.class).createResponse(expense));
+        Response.Status.OK, Beans.get(ExpenseCheckResponseService.class).createResponse(expense));
   }
 }

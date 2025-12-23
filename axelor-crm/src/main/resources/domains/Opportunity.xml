@@ -56,6 +56,7 @@
     <integer name="opportunityRating" title="Opportunity scoring"
       selection="gold.rating.icon.select"/>
     <integer name="priority" selection="crm.opportunity.priority.select"/>
+    <many-to-one name="opportunityLead" ref="com.axelor.apps.crm.db.Lead" title="Lead"/>
     <finder-method name="findByPartner" using="partner" all="true"/>
     <extra-code>
 		<![CDATA[

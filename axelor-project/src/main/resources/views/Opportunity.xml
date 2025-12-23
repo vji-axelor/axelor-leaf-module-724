@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_6.1.xsd">
+
+  <action-view name="action-opportunity-view-opportunity-win-popup-set-project"
+    model="com.axelor.apps.crm.db.Opportunity" title="Opportunity">
+    <view type="form" name="opportunity-form-win-popup-set-project"/>
+    <view-param name="popup" value="reload"/>
+    <view-param name="show-toolbar" value="false"/>
+    <view-param name="show-confirm" value="false"/>
+    <view-param name="popup-save" value="false"/>
+    <view-param name="forceEdit" value="true"/>
+    <context name="_showRecord" expr="eval: id"/>
+  </action-view>
+
+
+  <form name="opportunity-form-win-popup-set-project"
+    model="com.axelor.apps.crm.db.Opportunity" title="Opportunity" onLoad="">
+    <panel name="mainPanel">
+      <label title="Select or create Project and attache to Opportunity:" colSpan="12"/>
+      <panel name="partnerTypePanel" itemSpan="3" colSpan="12">
+        <field name="projectOpportunity" title="Project"/>
+      </panel>
+      <button name="okBtn" title="Ok"
+        onClick="action-opportunity-record-set-close-won-status,close" colSpan="3" colOffset="3"/>
+      <button name="cancelBtn" title="Cancel" onClick="close" colSpan="3"/>
+    </panel>
+  </form>
+
+  <action-method name="action-opportunity-record-set-close-won-status"
+    model="com.axelor.apps.crm.db.Opportunity">
+    <call class="com.axelor.apps.project.web.OpportunityController"
+      method="closeWonOpportunity"/>
+  </action-method>
+
+</object-views>

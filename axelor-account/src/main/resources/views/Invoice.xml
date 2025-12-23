@@ -1150,8 +1150,8 @@ InvoiceSet.length > 0))"
         readonlyIf="statusSelect != 1"
         onChange="action-group-account-invoice-partner-onchange-client"
         onSelect="action-invoice-method-set-partner-domain" canView="false"/>
-      <field name="contactPartner" canEdit="false" onSelect="action-set-partner-domain" required="true"
-        domain="self.isContact = true AND :company member of self.companySet"
+      <field name="contactPartner" canEdit="false" onSelect="action-set-partner-domain"
+        required="true" domain="self.isContact = true AND :company member of self.companySet"
         form-view="partner-contact-form" grid-view="partner-contact-grid"
         readonlyIf="partner != null &amp;&amp; partner.partnerTypeSelect == 2" canView="false"/>
       <field name="$partnerBankDetailsListWarning" showTitle="false" hidden="true"

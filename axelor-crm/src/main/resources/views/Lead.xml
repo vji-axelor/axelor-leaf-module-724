@@ -63,12 +63,12 @@
       if="(user == null || contactDate == null) &amp;&amp; $moment(todayDate).diff(createdOn,'days') &gt;= 15"/>
     <hilite color="danger" if="$moment(todayDate).diff(updatedOn,'days') &gt;= 15"/>
     <field name="createdOn" hidden="true"/>
-    <field name="updatedOn" hidden="true"/>
     <field name="simpleFullName"/>
     <field name="enterpriseName"/>
     <field name="fixedPhone" widget="phone" x-placeholder-number-type="FIXED_LINE"/>
     <field name="emailAddress.address"/>
     <field name="contactDate"/>
+    <field name="updatedOn"/>
     <field name="user" form-view="user-form" grid-view="user-grid"/>
     <field name="leadStatus" title="Status"/>
     <field name="leadScoringSelect" widget="ImageSelect" x-labels="false"/>

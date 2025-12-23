@@ -935,9 +935,10 @@
         <field name="clientPartner" onChange="action-sale-order-group-client-partner-change"
           onSelect="action-sale-order-method-set-client-partner-domain" form-view="partner-form"
           grid-view="partner-grid"/>
-        <field name="contactPartner" onChange="action-record-so-contact-partner-change" required="true"
-          onSelect="action-sale-order-domain-on-contact-partner" domain="self.isContact = true"
-          form-view="partner-contact-form" grid-view="partner-contact-grid"/>
+        <field name="contactPartner" onChange="action-record-so-contact-partner-change"
+          required="true" onSelect="action-sale-order-domain-on-contact-partner"
+          domain="self.isContact = true" form-view="partner-contact-form"
+          grid-view="partner-contact-grid"/>
         <panel name="mainInvoicingAddressPanel" stacked="true">
           <field name="mainInvoicingAddress" canNew="true"
             hideIf="$readonly() || statusSelect &gt; 1"

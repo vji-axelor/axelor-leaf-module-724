@@ -18,7 +18,7 @@ axelor {
 dependencies {
 	api project(":modules:axelor-project")
 	api project(":modules:axelor-bank-payment")
-
+	 
 	implementation libs.commons_lang3
 	implementation libs.commons_collections4
 	testImplementation libs.mockito
